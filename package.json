@@ -1,0 +1,32 @@
+{
+  "name": "kaspa-swap-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "node test.js",
+    "test-simple": "node simple-test.js",
+    "test-wallet": "node test-wallet-compatibility.js",
+    "test-wallet-quick": "node test-wallet-compatibility.js 2",
+    "dev": "node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@kaspa/core-lib": "^1.6.5",
+    "@kaspa/grpc-node": "^1.0.8",
+    "@kaspa/wallet": "^1.4.27",
+    "@noble/secp256k1": "^2.3.0",
+    "axios": "^1.11.0",
+    "bech32": "^2.0.0",
+    "bip32": "^5.0.0-rc.0",
+    "bip39": "^3.1.0",
+    "dotenv": "^17.2.1",
+    "mongoose": "^8.17.0",
+    "telegraf": "^4.16.3",
+    "tiny-secp256k1": "^2.2.4"
+  }
+}
