@@ -2,23 +2,24 @@
 
 A simple and secure Telegram bot for managing your Kaspa wallets.
 
-![Bot Start and Generate Commands](images/start.png)
+![Bot Start and Ge**Built with ❤️ for the Kaspa community**mands](images/start.png)
 
 ## ✨ What the bot does
 
-- 🔐 **Creates Kaspa wallets** compatible with all wallets
-- 📥 **Imports your existing wallets** (private key or mnemonic)
-- 💰 **Checks your balance** in real-time
-- 🌐 **Multi-network support** (Mainnet, Testnet)
-- 🔄 **Sends transactions** with intelligent fallback
-- ✅ **100% compatible** with Kasware, KDX, etc.
+- 🔐 **Generates new private keys** and creates secure Kaspa wallets
+- 🔑 **Connects with existing private keys** for seamless wallet access
+- 📥 **Imports wallets** via private key (64 hex chars) or mnemonic (12/24 words)
+- 💰 **Checks your balance** in real-time across networks
+- 🌐 **Multi-network support** (Mainnet, Testnet, Devnet)
+- 🔄 **Sends transactions** with intelligent API fallback
+- ✅ **100% compatible** with Kasware, KDX, and all Kaspa wallets
 
 ## 🎯 Main Commands
 
 ```
 /start    - Start the bot and get welcome message
-/generate - Create a new wallet with 24-word mnemonic
-/import   - Import existing wallet (private key or mnemonic)
+/generate - Generate a new private key & create wallet
+/import   - Connect with existing private key or mnemonic
 /network  - Switch between networks (kaspa/kaspatest/kaspadev)
 /balance  - Check your current balance
 /send     - Send KAS/TKAS transactions
@@ -82,11 +83,18 @@ npm start
 ## 📱 How to Use
 
 1. **Start** a conversation with the bot using `/start`
-2. **Create** a new wallet with `/generate` or **import** your existing one with `/import`
+2. **Generate** a new private key with `/generate` or **connect** with your existing one using `/import`
 3. **Switch networks** with `/network kaspatest` for testing
 4. **Check** your balance with `/balance`
 5. **Send** transactions easily with `/send <address> <amount>`
-6. **Get help** anytime with `/help`
+6. **Export** your private key anytime with `/export`
+7. **Get help** with `/help`
+
+### Import Methods Supported:
+
+- **Private Key**: 64-character hexadecimal string
+- **12-word Mnemonic**: BIP39 standard phrase
+- **24-word Mnemonic**: BIP39 standard phrase
 
 ## 🆘 Support & Community
 
