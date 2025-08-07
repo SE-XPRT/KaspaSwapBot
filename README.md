@@ -1,263 +1,141 @@
-# Kaspa Swap Bot
+# 🚀 Kaspa Swap Bot
 
-Bot Telegram pour la gestion de wallets Kaspa utilisant le Kaspa Wallet Framework avec les meilleures pratiques.
+A simple and secure Telegram bot for managing your Kaspa wallets.
 
-## ✨ Fonctionnalités
+![Kaspa Bot Demo](images/demo.png)
 
-- 🔐 **Génération de wallets sécurisés** (mnemonic 24 mots)
-- 📥 **Import/Export** compatible avec Kasware, KDX et autres wallets Kaspa
-- 🌐 **Support multi-réseaux** (Mainnet, Testnet, Devnet, Simnet)
-- 💰 **Gestion des balances** en temps réel
-- 🚀 **Transactions sécurisées** avec frais automatiques
-- 🔄 **Synchronisation optimisée** avec gestion des événements
+## ✨ What the bot does
 
-## 🏗️ Architecture
+- 🔐 **Creates Kaspa wallets** compatible with all wallets
+- 📥 **Imports your existing wallets** (private key or mnemonic)
+- 💰 **Checks your balance** in real-time
+- 🌐 **Multi-network support** (Mainnet, Testnet)
+- � **Sends transactions** with intelligent fallback
+- ✅ **100% compatible** with Kasware, KDX, etc.
 
-### Structure du projet
+![Features](images/features.png)
+
+## 🎯 Main Commands
 
 ```
-kaspa-swap-bot/
-├── lib/
-│   ├── createWallet.js    # Création et import de wallets
-│   ├── walletManager.js   # Gestionnaire de wallets avancé
-│   └── config.js          # Configuration centralisée
-├── index.js               # Bot Telegram principal
-├── package.json
-└── README.md
+/start    - Start the bot
+/generate - Create a new wallet
+/import   - Import an existing wallet
+/balance  - Check your balance
+/send     - Send KAS/TKAS
+/export   - Export your private key
 ```
 
-### Bonnes pratiques implémentées
+![Commands](images/commands.png)
 
-#### 1. **Framework Initialization**
+## 🚀 Quick Installation
 
-```javascript
-// Initialisation unique du framework
-await initKaspaFramework();
-```
-
-#### 2. **Configuration RPC appropriée**
-
-```javascript
-const rpc = new RPC({
-  clientConfig: {
-    host: `${host}:${port}`,
-  },
-});
-```
-
-#### 3. **Options de wallet optimisées**
-
-```javascript
-const walletOptions = {
-  skipSyncBalance: false,
-  addressDiscoveryExtent: 64,
-  syncOnce: true, // Pour éviter les connexions permanentes
-  logLevel: "info",
-  disableAddressDerivation: false,
-};
-```
-
-#### 4. **Gestion des événements**
-
-```javascript
-wallet.on("ready", (balance) => {
-  console.log("Wallet prêt:", balance);
-});
-
-wallet.on("balance-update", (balance) => {
-  console.log("Balance mise à jour:", balance);
-});
-```
-
-#### 5. **Gestion des erreurs et timeouts**
-
-```javascript
-await new Promise((resolve, reject) => {
-  const timeout = setTimeout(() => {
-    reject(new Error("Timeout: Wallet non prêt"));
-  }, 30000);
-
-  wallet.on("ready", () => {
-    clearTimeout(timeout);
-    resolve();
-  });
-});
-```
-
-## 🚀 Installation
-
-1. **Clonez le repository**
+1. **Clone the project**
 
 ```bash
-git clone <votre-repo>
-cd kaspa-swap-bot
+git clone https://github.com/SE-XPRT/KaspaSwapBot.git
+cd KaspaSwapBot
 ```
 
-2. **Installez les dépendances**
+2. **Install dependencies**
 
 ```bash
 npm install
 ```
 
-3. **Configuration**
-   Créez un fichier `.env` :
+3. **Configure your Telegram token**
 
-```env
-BOT_TOKEN=votre_token_telegram
+```bash
+echo "BOT_TOKEN=your_token_here" > .env
 ```
 
-4. **Démarrage**
+4. **Start the bot**
 
 ```bash
 npm start
 ```
 
-## 🎯 Commandes Bot
+![Installation](images/install.png)
 
-### Gestion des wallets
+## 🔐 Security & Compatibility
 
-- `/generate` - Crée un nouveau wallet (mnemonic 24 mots)
-- `/import` - Importe un wallet existant via mnemonic
-- `/export <password>` - Exporte le wallet chiffré
+✅ **Private keys** never stored permanently  
+✅ **Sensitive messages** automatically deleted  
+✅ **Compatible** with Kasware, KDX, Tangem  
+✅ **24-word mnemonics** BIP39 standard  
+✅ **Multi-network** support (kaspa, kaspatest, kaspadev)
 
-### Opérations
+![Security](images/security.png)
 
-- `/balance` - Affiche la balance actuelle
-- `/send <adresse> <montant>` - Envoie des KAS
+## 🌐 Supported Networks
 
-### Configuration
+| Network     | Description      | Currency |
+| ----------- | ---------------- | -------- |
+| `kaspa`     | Official Mainnet | KAS      |
+| `kaspatest` | Test Network     | TKAS     |
+| `kaspadev`  | Development      | DKAS     |
 
-- `/network <réseau>` - Change de réseau
-- `/help` - Aide détaillée
+## � How to Use
 
-## 🌐 Réseaux supportés
+1. **Start** a conversation with the bot
+2. **Create** a new wallet or **import** your existing one
+3. **Check** your balance
+4. **Send** transactions easily
 
-| Réseau      | Description | Port  | Préfixe    |
-| ----------- | ----------- | ----- | ---------- |
-| `kaspa`     | Mainnet     | 16110 | kaspa:     |
-| `kaspatest` | Testnet     | 16210 | kaspatest: |
-| `kaspadev`  | Devnet      | 16310 | kaspadev:  |
-| `kaspasim`  | Simnet      | 16510 | kaspasim:  |
+![Usage Flow](images/usage.png)
 
-## 🔐 Sécurité
+## 🏗️ Architecture
 
-### Mnemonic 24 mots
+### Clean & Modular Structure
 
-- Génération avec 256 bits d'entropie
-- Compatible BIP39
-- Compatible avec tous les wallets Kaspa
-
-### Gestion des clés privées
-
-- Pas d'exposition directe des clés privées
-- Chiffrement disponible pour l'export
-- Suppression automatique des messages sensibles
-
-### Validation des entrées
-
-- Validation des montants et adresses
-- Vérification des mnemonics
-- Gestion des timeouts
-
-## 🔧 Configuration avancée
-
-### Personnalisation des réseaux
-
-```javascript
-const customOptions = {
-  network: "kaspatest",
-  rpcHost: "custom-host.com",
-  rpcPort: 16210,
-  logLevel: "verbose",
-};
+```
+kaspa-swap-bot/
+├── lib/
+│   ├── createWallet.js        # Wallet creation & utilities
+│   ├── walletManager.js       # Transaction management
+│   ├── privateKeyImport.js    # Private key derivation
+│   └── apiTransactionSender.js # API fallback system
+├── index.js                   # Main Telegram bot
+└── package.json
 ```
 
-### Frais de transaction
+### Key Features
 
-```javascript
-const txParams = {
-  toAddr: "kaspa:...",
-  amount: 1.5,
-  fee: 0.001,
-  networkFeeMax: 0.01,
-};
+- **Framework initialization** - Single init, reused across sessions
+- **Private key derivation** - Real address derivation with kaspacore
+- **API fallback system** - When RPC nodes are unavailable
+- **Session management** - Secure temporary wallet storage
+
+## � Advanced Usage
+
+### Network Switching
+
+```
+/network kaspa      - Switch to Mainnet
+/network kaspatest  - Switch to Testnet
+/network kaspadev   - Switch to Devnet
 ```
 
-## 🤝 Compatibilité
+### Transaction Examples
 
-Ce bot est entièrement compatible avec :
-
-- **Kasware** - Extension navigateur
-- **KDX** - Wallet desktop
-- **kaspa-wallet-cli** - Wallet CLI
-- Tous les wallets respectant les standards Kaspa
-
-### Format d'adresse
-
-- Utilise le format bech32 standard Kaspa
-- Préfixes de réseau appropriés
-- Chemins de dérivation HD standards (`m/44'/111111'/0'/0/0`)
-
-## 📝 Logs et débogage
-
-### Niveaux de log disponibles
-
-- `error` - Erreurs uniquement
-- `warn` - Avertissements et erreurs
-- `info` - Informations générales (défaut)
-- `verbose` - Détails des opérations
-- `debug` - Débogage complet
-
-### Configuration du logging
-
-```javascript
-wallet.setLogLevel("verbose");
+```
+/send kaspa:qz123... 1.5       - Send 1.5 KAS on Mainnet
+/send kaspatest:qq456... 10    - Send 10 TKAS on Testnet
 ```
 
-## 🔄 Gestion des connexions
+## 🆘 Support & Community
 
-### Mode synchronisation
+- 📧 **GitHub Issues** for bugs and feature requests
+- 💬 **Discussions** for questions and ideas
+- 📖 **Wiki** for detailed documentation
+- 🌟 **Star the project** if you like it!
 
-- `syncOnce: true` - Synchronisation rapide puis déconnexion
-- `syncOnce: false` - Mode monitoring continu
+## 📄 License
 
-### Déconnexion propre
+MIT License - Feel free to use in your projects!
 
-```javascript
-await wallet.disconnect();
-await walletManager.unloadAllWallets();
-```
+---
 
-## 📊 Monitoring
+**Built with ❤️ for the Kaspa community**
 
-### Événements surveillés
-
-- `api-online/offline` - État de la connexion
-- `balance-update` - Changements de balance
-- `utxo-change` - Modifications UTXO
-- `blue-score-changed` - Nouveaux blocs
-
-## ⚠️ Notes importantes
-
-1. **Sauvegardez toujours vos mnemonics** dans un endroit sûr
-2. **Ne partagez jamais** vos clés privées ou mnemonics
-3. **Testez d'abord** sur testnet avant le mainnet
-4. **Surveillez les frais** de transaction
-5. **Utilisez des mots de passe forts** pour l'export chiffré
-
-## 🆘 Support
-
-En cas de problème :
-
-1. Vérifiez les logs du bot
-2. Testez sur testnet
-3. Consultez la documentation Kaspa Wallet Framework
-4. Vérifiez la connectivité au nœud Kaspa
-
-## 📚 Ressources
-
-- [Kaspa Wallet Framework](https://github.com/kaspanet/kaspa-wallet)
-- [Documentation Kaspa](https://kaspa.org)
-- [Kasware Wallet](https://kasware.xyz)
-- [KDX Wallet](https://github.com/aspectron/kdx)
-# KaspaSwapBot
+![Footer](images/footer.png)
